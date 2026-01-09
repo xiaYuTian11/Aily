@@ -2,7 +2,7 @@
 # 部署脚本 - 构建并推送Docker镜像到Docker Hub
 
 # 配置
-DOCKER_USER="your-dockerhub-username"
+DOCKER_USER="xiaytian"
 IMAGE_NAME="aily"
 VERSION=${1:-latest}
 

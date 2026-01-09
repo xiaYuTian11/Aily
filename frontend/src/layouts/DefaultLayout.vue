@@ -35,7 +35,11 @@
       </el-menu>
     </el-aside>
     <el-main class="main">
-      <router-view />
+      <router-view v-slot="{ Component }">
+        <transition name="page" mode="out-in">
+          <component :is="Component" />
+        </transition>
+      </router-view>
     </el-main>
   </el-container>
 </template>
@@ -77,19 +81,36 @@ const route = useRoute()
   color: rgba(255,255,255,0.7);
   padding-left: 56px !important;
 }
+.menu :deep(.el-menu-item),
+.menu :deep(.el-sub-menu__title) {
+  transition: all 0.3s ease;
+}
 .menu :deep(.el-menu-item:hover),
 .menu :deep(.el-sub-menu__title:hover),
 .menu :deep(.el-sub-menu .el-menu .el-menu-item:hover) {
-  background: rgba(255,255,255,0.1);
+  background: rgba(102, 126, 234, 0.2);
   color: #fff;
+  padding-left: 24px;
 }
 .menu :deep(.el-menu-item.is-active) {
-  background: linear-gradient(90deg, #409eff 0%, #53a8ff 100%);
+  background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
   color: #fff;
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
 }
 .main {
-  background: #f0f2f5;
-  padding: 24px;
+  background:
+    radial-gradient(circle at 20% 80%, rgba(102, 126, 234, 0.08) 0%, transparent 50%),
+    radial-gradient(circle at 80% 20%, rgba(118, 75, 162, 0.08) 0%, transparent 50%),
+    radial-gradient(circle at 1px 1px, rgba(102, 126, 234, 0.1) 1px, transparent 1px);
+  background-size: 100% 100%, 100% 100%, 24px 24px;
+  background-color: #f0f2f5;
+  padding: 16px;
   overflow-y: auto;
+  position: relative;
+  animation: bgShift 20s ease-in-out infinite;
+}
+@keyframes bgShift {
+  0%, 100% { background-position: 0% 0%, 100% 100%, 0 0; }
+  50% { background-position: 100% 100%, 0% 0%, 12px 12px; }
 }
 </style>

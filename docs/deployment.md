@@ -50,7 +50,29 @@ docker run -d -p 80:80 --name aily yourusername/aily:latest
 
 ---
 
-## 四、Makefile快捷命令
+## 四、Windows 部署脚本
+
+项目提供 Windows 批处理脚本，支持自动版本递增：
+
+```batch
+# 运行部署脚本（自动递增版本号）
+scripts\deploy.bat
+```
+
+**脚本功能：**
+- 从 `VERSION` 文件读取当前版本（如 1.0.0）
+- 自动递增 patch 版本号（1.0.0 → 1.0.1）
+- 构建并推送带版本标签的镜像
+- 同时更新 latest 标签
+
+**版本文件：**
+```
+VERSION    # 存储当前版本号，如 1.0.1
+```
+
+---
+
+## 五、Makefile快捷命令（Linux/Mac）
 
 项目根目录提供Makefile，简化操作：
 

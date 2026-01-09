@@ -1,6 +1,9 @@
 <template>
   <div class="tool-page">
-    <h2>⏰ 时间戳转换</h2>
+    <div class="page-header">
+      <h2>⏰ 时间戳转换</h2>
+      <p class="page-desc">Unix 时间戳与日期时间互相转换</p>
+    </div>
     <el-card class="tool-card">
       <el-row :gutter="24">
         <el-col :span="12">
@@ -37,6 +40,15 @@
         <span>当前时间戳 (点击复制):</span>
         <code class="clickable" @click="copy(currentTimestamp)">{{ currentTimestamp }} 秒</code>
         <code class="clickable" @click="copy(currentTimestampMs)">{{ currentTimestampMs }} 毫秒</code>
+      </div>
+      <el-divider />
+      <div class="tips">
+        <div class="tips-title">💡 使用说明</div>
+        <ul>
+          <li>Unix 时间戳是从 1970-01-01 00:00:00 UTC 开始的秒数</li>
+          <li>秒级时间戳为 10 位数字，毫秒级为 13 位数字</li>
+          <li>点击上方时间戳可快速复制</li>
+        </ul>
       </div>
     </el-card>
   </div>
@@ -86,6 +98,9 @@ function copy(val: number) {
 </script>
 
 <style scoped>
+.page-header { margin-bottom: 20px; }
+.page-header h2 { margin-bottom: 8px; }
+.page-desc { color: #909399; font-size: 14px; }
 .section { padding: 20px; background: #f5f7fa; border-radius: 8px; min-height: 200px; }
 .section-title { font-weight: 600; margin-bottom: 16px; font-size: 16px; }
 .options { display: flex; justify-content: space-between; align-items: center; margin-top: 16px; }
@@ -93,4 +108,8 @@ function copy(val: number) {
 .current-time { display: flex; align-items: center; gap: 16px; }
 .current-time code { font-size: 14px; color: #409eff; padding: 8px 12px; background: #ecf5ff; border-radius: 4px; cursor: pointer; }
 .clickable:hover { background: #409eff; color: #fff; }
+.tips { background: #fdf6ec; padding: 16px; border-radius: 8px; }
+.tips-title { font-weight: 500; margin-bottom: 8px; color: #e6a23c; }
+.tips ul { margin: 0; padding-left: 20px; color: #909399; font-size: 13px; }
+.tips li { margin-bottom: 4px; }
 </style>

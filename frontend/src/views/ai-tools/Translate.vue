@@ -1,28 +1,41 @@
 <template>
   <div class="tool-page">
-    <h2>🌐 中英互译</h2>
+    <div class="page-header">
+      <h2>🌐 中英互译</h2>
+      <p class="page-desc">中文与英文之间的快速翻译</p>
+    </div>
     <el-card class="tool-card">
       <div class="translate-container">
         <div class="input-area">
           <div class="lang-header">
-            <span>{{ sourceLang === 'zh' ? '中文' : '英文' }}</span>
+            <span class="lang-label">{{ sourceLang === 'zh' ? '🇨🇳 中文' : '🇺🇸 英文' }}</span>
+            <el-button size="small" text @click="input = ''">清空</el-button>
           </div>
-          <el-input v-model="input" type="textarea" :rows="8" placeholder="输入要翻译的内容..." />
+          <el-input v-model="input" type="textarea" :rows="10" placeholder="输入要翻译的内容..." />
+          <div class="char-count">{{ input.length }} 字符</div>
         </div>
         <div class="swap-btn">
-          <el-button circle @click="swapLang">⇄</el-button>
+          <el-button circle size="large" @click="swapLang">⇄</el-button>
         </div>
         <div class="output-area">
           <div class="lang-header">
-            <span>{{ targetLang === 'en' ? '英文' : '中文' }}</span>
+            <span class="lang-label">{{ targetLang === 'en' ? '🇺🇸 英文' : '🇨🇳 中文' }}</span>
+            <el-button size="small" text @click="copy">复制</el-button>
           </div>
-          <el-input v-model="output" type="textarea" :rows="8" readonly placeholder="翻译结果..." />
+          <el-input v-model="output" type="textarea" :rows="10" readonly placeholder="翻译结果将显示在这里..." />
         </div>
       </div>
       <div class="actions">
         <el-button type="primary" size="large" @click="doTranslate" :loading="loading">翻译</el-button>
-        <el-button @click="copy">复制结果</el-button>
-        <el-button text @click="clear">清空</el-button>
+      </div>
+      <el-divider />
+      <div class="tips">
+        <div class="tips-title">💡 使用说明</div>
+        <ul>
+          <li>点击中间按钮可切换翻译方向</li>
+          <li>支持中英文自动检测</li>
+          <li>翻译结果可直接复制使用</li>
+        </ul>
       </div>
     </el-card>
   </div>
@@ -67,17 +80,22 @@ function copy() {
   navigator.clipboard.writeText(output.value)
   ElMessage.success('已复制')
 }
-
-function clear() {
-  input.value = ''
-  output.value = ''
-}
 </script>
 
 <style scoped>
-.translate-container { display: flex; gap: 16px; align-items: center; }
-.input-area, .output-area { flex: 1; }
-.lang-header { margin-bottom: 8px; font-weight: 500; color: #409eff; }
-.swap-btn { padding: 0 8px; }
-.actions { margin-top: 20px; display: flex; gap: 12px; }
+.page-header { margin-bottom: 20px; }
+.page-header h2 { margin-bottom: 8px; }
+.page-desc { color: #909399; font-size: 14px; }
+.tool-card { border-radius: 12px; }
+.translate-container { display: flex; gap: 16px; align-items: stretch; }
+.input-area, .output-area { flex: 1; display: flex; flex-direction: column; }
+.lang-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
+.lang-label { font-weight: 500; color: #409eff; font-size: 15px; }
+.char-count { text-align: right; font-size: 12px; color: #909399; margin-top: 4px; }
+.swap-btn { display: flex; align-items: center; padding: 0 8px; }
+.actions { margin-top: 20px; display: flex; justify-content: center; }
+.tips { background: #ecf5ff; padding: 16px; border-radius: 8px; }
+.tips-title { font-weight: 500; margin-bottom: 8px; color: #409eff; }
+.tips ul { margin: 0; padding-left: 20px; color: #909399; font-size: 13px; }
+.tips li { margin-bottom: 4px; }
 </style>

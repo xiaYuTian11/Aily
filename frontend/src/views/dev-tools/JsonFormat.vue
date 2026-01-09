@@ -1,6 +1,9 @@
 <template>
   <div class="tool-page">
-    <h2>📋 JSON格式化</h2>
+    <div class="page-header">
+      <h2>📋 JSON格式化</h2>
+      <p class="page-desc">格式化、压缩、校验 JSON 数据</p>
+    </div>
     <el-card class="tool-card">
       <el-row :gutter="24">
         <el-col :span="12">
@@ -26,6 +29,15 @@
           <el-option :value="2" label="2空格" />
           <el-option :value="4" label="4空格" />
         </el-select>
+      </div>
+      <el-divider />
+      <div class="tips">
+        <div class="tips-title">💡 使用说明</div>
+        <ul>
+          <li>格式化：将压缩的 JSON 转换为易读的缩进格式</li>
+          <li>压缩：移除空格和换行，减小数据体积</li>
+          <li>校验：检查 JSON 语法是否正确</li>
+        </ul>
       </div>
     </el-card>
   </div>
@@ -84,7 +96,14 @@ function copy() {
 </script>
 
 <style scoped>
+.page-header { margin-bottom: 20px; }
+.page-header h2 { margin-bottom: 8px; }
+.page-desc { color: #909399; font-size: 14px; }
 .tool-card { border-radius: 12px; }
 .editor-header { display: flex; justify-content: space-between; margin-bottom: 8px; font-weight: 500; }
 .actions { display: flex; gap: 12px; margin-top: 20px; padding-top: 20px; border-top: 1px solid #ebeef5; }
+.tips { background: #f0f9eb; padding: 16px; border-radius: 8px; }
+.tips-title { font-weight: 500; margin-bottom: 8px; color: #67c23a; }
+.tips ul { margin: 0; padding-left: 20px; color: #909399; font-size: 13px; }
+.tips li { margin-bottom: 4px; }
 </style>
