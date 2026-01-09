@@ -117,3 +117,51 @@ jobs:
           docker build -t ${{ secrets.DOCKER_USERNAME }}/aily:latest .
           echo ${{ secrets.DOCKER_PASSWORD }} | docker login -u ${{ secrets.DOCKER_USERNAME }} --password-stdin
           docker push ${{ secrets.DOCKER_USERNAME }}/aily:latest
+```
+
+---
+
+## 七、Git 版本控制
+
+### 仓库地址
+
+- GitHub: https://github.com/xiaYuTian11/Aily.git
+
+### 常用命令
+
+```bash
+# 克隆仓库
+git clone https://github.com/xiaYuTian11/Aily.git
+
+# 查看状态
+git status
+
+# 添加所有更改
+git add .
+
+# 提交更改
+git commit -m "feat: 功能描述"
+
+# 推送到远程
+git push origin master
+
+# 拉取最新代码
+git pull origin master
+```
+
+### 完整部署流程
+
+```bash
+# 1. 拉取最新代码
+git pull origin master
+
+# 2. 构建 Docker 镜像
+docker build -t aily:latest .
+
+# 3. 推送镜像（可选）
+docker tag aily:latest yourusername/aily:latest
+docker push yourusername/aily:latest
+
+# 4. 运行容器
+docker run -d -p 80:80 --name aily aily:latest
+```
